@@ -46,4 +46,3 @@ def checkout(skus: str) -> int:
     total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
 
-

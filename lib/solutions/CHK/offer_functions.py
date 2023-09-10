@@ -17,13 +17,13 @@ def offer_E(skus: List[str], total: int) -> Tuple[List[str], int]:
 def multiproduct_offer(
         skus: List[str],
         total: int,
-        offer: Dict[int: int],
-        product: str
+        product: str,
+        offer: Dict[int, int],
 ) -> Tuple[List[str], int]:
     # generic of a multiproduct offer.
     count = skus.count(product)
     init_count = copy.deepcopy(count)
-    for multiple, price in sorted(offer, reverse=True):
+    for multiple, price in sorted(offer.items(), reverse=True):
         total += (count // multiple) * price
         count = count % multiple
     # count ends up as the remainder after all offers applied

@@ -56,6 +56,13 @@ def group_offer(
     # don't make any changes if there aren't enough products in group.
     if len(potential_chars) < group_size:
         return skus, total
-    potential_chars = sorted(potential_chars, )
-    pass
+    potential_chars = sorted(potential_chars, key=lambda char: prices[char],
+                             reverse=True)
+    potential_chars = potential_chars[:len(potential_chars)//group_size]
+    # update the total
+    total += (len(potential_chars) // group_size) * offer_price
+    for char in potential_chars:
+        skus.remove(char)
+    return skus, total
+
 

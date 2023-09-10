@@ -2,10 +2,9 @@ from collections import Counter
 from typing import Tuple, Dict, List
 
 
-def offer_E(skus: str, total: int) -> Tuple[List[str], int]:
+def offer_E(skus: List[str], total: int) -> Tuple[List[str], int]:
     # apply the offer (get one b free for 2 e) by removing b from the skus to charge
     count_e = skus.count("E")
-    skus = list(skus)
     for i in range(count_e // 2):
         try:
             skus.remove("B")
@@ -16,7 +15,6 @@ def offer_E(skus: str, total: int) -> Tuple[List[str], int]:
 
 def offer_A(skus: List[str], total: int) -> Tuple[List[str], int]:
     count_a = skus.count("A")
-    skus = list(skus)
     offer_5_num = count_a // 5
     offer_3_num = count_a % 5 // 3
     remaining = count_a % 5 % 3
@@ -33,7 +31,6 @@ def offer_A(skus: List[str], total: int) -> Tuple[List[str], int]:
 
 def offer_B(skus: List[str], total: int) -> Tuple[List[str], int]:
     count_b = skus.count("B")
-    skus = list(skus)
     total += (count_b // 2) * 45
     to_remove = count_b - (count_b % 2)
     for i in range(to_remove):
@@ -42,6 +39,12 @@ def offer_B(skus: List[str], total: int) -> Tuple[List[str], int]:
         except ValueError:
             break
     return skus, total
+
+
+def offer_F(skus: List[str], total: int) -> Tuple[List[str], int]:
+    count_b = skus.count("B")
+    pass
+
 
 
 def calculate_prices(skus: List[str], prices: Dict[str, int], total: int) -> int:
@@ -78,6 +81,7 @@ def checkout(skus: str) -> int:
 
     total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
+
 
 
 

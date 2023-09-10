@@ -26,5 +26,3 @@ class TestCheckout():
 
     def test_group_offers_leftover(self):
         assert checkout_solution.checkout("STTXYYZ") == 107
-
-

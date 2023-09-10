@@ -64,6 +64,3 @@ def group_offer(
     for char in potential_chars:
         skus.remove(char)
     return skus, total
-
-
-

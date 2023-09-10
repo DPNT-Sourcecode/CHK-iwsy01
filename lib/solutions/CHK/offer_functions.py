@@ -1,17 +1,5 @@
 import copy
-from typing import List, Tuple, Dict
-
-
-def offer_E(skus: List[str], total: int) -> Tuple[List[str], int]:
-    # apply the offer (get one b free for 2 e) by removing b from the skus to charge
-    # note should be applied before any B offer.
-    count_e = skus.count("E")
-    for i in range(count_e // 2):
-        try:
-            skus.remove("B")
-        except ValueError:
-            break
-    return skus, total
+from typing import List, Tuple, Dict, Set
 
 
 def remove_other_product_offer(
@@ -51,3 +39,23 @@ def multiproduct_offer(
         except ValueError:
             break
     return skus, total
+
+
+def group_offer(
+        skus: List[str],
+        total: int,
+        product_group: Set[str],
+        group_size: int,
+        offer_price: int,
+        prices: Dict[str, int],
+) -> Tuple[List[str], int]:
+    potential_chars = list()
+    for char in skus:
+        if char in product_group:
+            potential_chars.append(char)
+    # don't make any changes if there aren't enough products in group.
+    if len(potential_chars) < group_size:
+        return skus, total
+    potential_chars = sorted(potential_chars, )
+    pass
+

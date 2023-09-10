@@ -13,4 +13,3 @@ class TestCheckout():
 
     def test_many_a_offers(self):
         assert checkout_solution.checkout("AAAAAAAAAAAAAABCDDEE") == 630
-

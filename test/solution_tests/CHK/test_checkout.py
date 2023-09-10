@@ -20,4 +20,3 @@ class TestCheckout():
     def test_alphabet_offers(self):
         assert checkout_solution.checkout(
             "AAAAABBBCCDEFFGHIIJKLMMNOPPQRSTTTUVWWXYZ") == 1350
-

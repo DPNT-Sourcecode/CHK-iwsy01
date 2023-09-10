@@ -51,4 +51,3 @@ def multiproduct_offer(
         except ValueError:
             break
     return skus, total
-

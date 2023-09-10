@@ -1,8 +1,8 @@
 from collections import Counter
-from typing import Tuple, Dict
+from typing import Tuple, Dict, List
 
 
-def offer_E(skus: str, total: int) -> Tuple[str, int]:
+def offer_E(skus: str, total: int) -> Tuple[List[str], int]:
     # apply the offer (get one b free for 2 e) by removing b from the skus to charge
     count_e = skus.count("E")
     skus = list(skus)
@@ -11,10 +11,10 @@ def offer_E(skus: str, total: int) -> Tuple[str, int]:
             skus.remove("B")
         except ValueError:
             break
-    return ''.join(skus), total
+    return skus, total
 
 
-def offer_A(skus: str, total: int) -> Tuple[str, int]:
+def offer_A(skus: str, total: int) -> Tuple[List[str], int]:
     count_a = skus.count("A")
     skus = list(skus)
     offer_5_num = count_a // 5
@@ -28,10 +28,10 @@ def offer_A(skus: str, total: int) -> Tuple[str, int]:
             skus.remove("A")
         except ValueError:
             break
-    return ''.join(skus), total
+    return skus, total
 
 
-def offer_B(skus: str, total: int) -> Tuple[str, int]:
+def offer_B(skus: str, total: int) -> Tuple[List[str], int]:
     count_b = skus.count("B")
     skus = list(skus)
     total += (count_b // 2) * 200
@@ -41,10 +41,10 @@ def offer_B(skus: str, total: int) -> Tuple[str, int]:
             skus.remove("B")
         except ValueError:
             break
-    return ''.join(skus), total
+    return skus, total
 
 
-def calculate_prices(skus: str, prices: Dict[str, int], total: int) -> int:
+def calculate_prices(skus: List[str], prices: Dict[str, int], total: int) -> int:
     counts = Counter(skus)
     for item, count in counts.items():
         try:
@@ -62,7 +62,7 @@ def checkout(skus: str):
         offer_A,
         offer_B,
     ]
-
+    skus = list(skus)
     total = 0
     for offer in offers:
         skus, total = offer(skus, total)
@@ -75,7 +75,8 @@ def checkout(skus: str):
         "D": 15,
     }
 
-    calculate_prices(skus, prices=prices, total=total)
+    calculate_prices(skus=skus, prices=prices, total=total)
     return total
+
 
 

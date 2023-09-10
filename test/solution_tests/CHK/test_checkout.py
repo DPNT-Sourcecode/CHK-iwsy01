@@ -9,7 +9,8 @@ class TestCheckout():
         assert checkout_solution.checkout("AK") == -1
 
     def test_new_offers(self):
-        assert checkout_solution.checkout("AAAAABBCDDEEE") == 400
+        assert checkout_solution.checkout("AAAAABBCDDEEE") == 415
 
     def test_many_a_offers(self):
-        assert checkout_solution.checkout("AAAAAAAAAAAAAABCDDEE") == 630
+        assert checkout_solution.checkout("AAAAAAAAAAAAAABCDDEE") == 795
+

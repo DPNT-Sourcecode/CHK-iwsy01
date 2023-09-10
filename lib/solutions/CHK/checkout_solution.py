@@ -32,7 +32,7 @@ def offer_A(skus: List[str], total: int) -> Tuple[List[str], int]:
 def offer_B(skus: List[str], total: int) -> Tuple[List[str], int]:
     count_b = skus.count("B")
     total += (count_b // 2) * 45
-    to_remove = count_b - (count_b % 2)
+    to_remove = count_b // 2
     for i in range(to_remove):
         try:
             skus.remove("B")
@@ -42,8 +42,15 @@ def offer_B(skus: List[str], total: int) -> Tuple[List[str], int]:
 
 
 def offer_F(skus: List[str], total: int) -> Tuple[List[str], int]:
-    count_b = skus.count("B")
-    pass
+    count = skus.count("F")
+    total += (count // 3) * 20  # 20 is 2xF cost
+    to_remove = (count // 3)
+    for i in range(to_remove):
+        try:
+            skus.remove("F")
+        except ValueError:
+            break
+    return skus, total
 
 
 
@@ -64,6 +71,7 @@ def checkout(skus: str) -> int:
         offer_E,
         offer_A,
         offer_B,
+        offer_F,
     ]
     skus = list(skus)
     total = 0
@@ -77,11 +85,9 @@ def checkout(skus: str) -> int:
         "C": 20,
         "D": 15,
         "E": 40,
+        "F": 10,
     }
 
     total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
-
-
-
 

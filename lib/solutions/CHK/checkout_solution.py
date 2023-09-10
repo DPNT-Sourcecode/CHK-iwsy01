@@ -75,8 +75,9 @@ def checkout(skus: str):
         "D": 15,
     }
 
-    calculate_prices(skus=skus, prices=prices, total=total)
+    total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
+
 
 
 

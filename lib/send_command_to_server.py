@@ -1,3 +1,4 @@
+
 import sys
 from tdl.queue.queue_based_implementation_runner import QueueBasedImplementationRunnerBuilder
 from tdl.runner.challenge_session import ChallengeSession
@@ -71,3 +72,4 @@ ChallengeSession\
     .with_config(Utils.get_config())\
     .with_action_provider(lambda: get_user_input(sys.argv[1:]))\
     .start()
+

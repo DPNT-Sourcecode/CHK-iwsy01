@@ -8,4 +8,8 @@ class TestCheckout():
     def test_invalid_input(self):
         assert checkout_solution.checkout("AK") == -1
 
-    def test_new_offers
+    def test_new_offers(self):
+        assert checkout_solution.checkout("AABACADAADEE") == 260
+
+    def test_many_a_offers(self):
+        assert checkout_solution.checkout("AABACADAADEE") == 260

@@ -1,12 +1,12 @@
 from collections import Counter
-from typing import Tuple
+from typing import Tuple, Dict
 
 
 def offer_E(skus: str, total: int) -> Tuple[str, int]:
     # apply the offer (get one b free for 2 e) by removing b from the skus to charge
     count_e = skus.count("E")
     skus = list(skus)
-    for i in range(count_e):
+    for i in range(count_e // 2):
         try:
             skus.remove("B")
         except ValueError:
@@ -17,12 +17,56 @@ def offer_E(skus: str, total: int) -> Tuple[str, int]:
 def offer_A(skus: str, total: int) -> Tuple[str, int]:
     count_a = skus.count("A")
     skus = list(skus)
+    offer_5_num = count_a // 5
+    offer_3_num = count_a % 5 // 3
+    remaining = count_a % 5 % 3
+    total += offer_5_num * 200
+    total += offer_3_num * 130
+    to_remove = count_a - remaining
+    for i in range(to_remove):
+        try:
+            skus.remove("A")
+        except ValueError:
+            break
+    return ''.join(skus), total
 
 
+def offer_B(skus: str, total: int) -> Tuple[str, int]:
+    count_b = skus.count("B")
+    skus = list(skus)
+    total += (count_b // 2) * 200
+    to_remove = count_b - (count_b % 2)
+    for i in range(to_remove):
+        try:
+            skus.remove("B")
+        except ValueError:
+            break
+    return ''.join(skus), total
+
+
+def calculate_prices(skus: str, prices: Dict[str, int], total: int) -> int:
+    counts = Counter(skus)
+    for item, count in counts.items():
+        try:
+            total += count * prices[item]
+        except KeyError:
+            return -1
+    return total
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str):
+    # apply offers first - then calculate prices
+    offers = [
+        offer_E,
+        offer_A,
+        offer_B,
+    ]
+
+    total = 0
+    for offer in offers:
+        skus, total = offer(skus, total)
+
     # iterate over skus table the cost return the cost. return -1 for invalid input.
     prices = {
         "A": 50,
@@ -30,20 +74,8 @@ def checkout(skus: str):
         "C": 20,
         "D": 15,
     }
-    total = 0
-    counts = Counter(skus)
-    for item, count in counts.items():
-        if item == "A":
-            total += (count // 3) * 130
-            total += (count % 3) * prices[item]
-        elif item == "B":
-            total += (count // 2) * 45
-            total += (count % 2) * prices[item]
-        else:
-            try:
-                total += count * prices[item]
-            except KeyError:
-                return -1
+
+    calculate_prices(skus, prices=prices, total=total)
     return total
 
 

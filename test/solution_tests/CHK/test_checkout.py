@@ -19,11 +19,12 @@ class TestCheckout():
 
     def test_alphabet_offers(self):
         assert checkout_solution.checkout(
-            "AAAAABBBCCDEFFGHIIJKLMMNOPPQRSTTTUVWWXYZ") == 1350
+            "AAAAABBBCCDEFFGHIIJKLMMNOPPQRSTTTUVWWXYZ") == 1207
 
     def test_group_offers(self):
         assert checkout_solution.checkout("STTXYZ") == 90
 
     def test_group_offers_leftover(self):
         assert checkout_solution.checkout("STTXYYZ") == 107
+
 

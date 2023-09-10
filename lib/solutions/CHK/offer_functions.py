@@ -58,11 +58,12 @@ def group_offer(
         return skus, total
     potential_chars = sorted(potential_chars, key=lambda char: prices[char],
                              reverse=True)
-    potential_chars = potential_chars[:len(potential_chars)//group_size]
+    potential_chars = potential_chars[:(len(potential_chars) // group_size) * group_size]
     # update the total
     total += (len(potential_chars) // group_size) * offer_price
     for char in potential_chars:
         skus.remove(char)
     return skus, total
+
 
 

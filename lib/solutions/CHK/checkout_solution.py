@@ -14,7 +14,7 @@ def offer_E(skus: str, total: int) -> Tuple[List[str], int]:
     return skus, total
 
 
-def offer_A(skus: str, total: int) -> Tuple[List[str], int]:
+def offer_A(skus: List[str], total: int) -> Tuple[List[str], int]:
     count_a = skus.count("A")
     skus = list(skus)
     offer_5_num = count_a // 5
@@ -31,7 +31,7 @@ def offer_A(skus: str, total: int) -> Tuple[List[str], int]:
     return skus, total
 
 
-def offer_B(skus: str, total: int) -> Tuple[List[str], int]:
+def offer_B(skus: List[str], total: int) -> Tuple[List[str], int]:
     count_b = skus.count("B")
     skus = list(skus)
     total += (count_b // 2) * 45
@@ -55,7 +55,7 @@ def calculate_prices(skus: List[str], prices: Dict[str, int], total: int) -> int
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-def checkout(skus: str):
+def checkout(skus: str) -> int:
     # apply offers first - then calculate prices
     offers = [
         offer_E,
@@ -78,5 +78,6 @@ def checkout(skus: str):
 
     total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
+
 
 

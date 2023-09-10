@@ -1,9 +1,19 @@
 from collections import Counter
+from typing import Tuple
+
+
+def offer_E(skus: str) -> Tuple[str, int]:
+    # apply the offer (get one b free for 2 e) by removing b from the skus to charge
+    count_e = skus.count("E")
+    skus = list(skus)
+    for i in range(count_e):
+        
+    pass
 
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-def checkout(skus):
+def checkout(skus: str):
     # iterate over skus table the cost return the cost. return -1 for invalid input.
     prices = {
         "A": 50,
@@ -26,4 +36,5 @@ def checkout(skus):
             except KeyError:
                 return -1
     return total
+
 

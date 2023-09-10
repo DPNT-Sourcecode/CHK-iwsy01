@@ -1,6 +1,6 @@
 from collections import Counter
 from typing import Dict, List
-from .offer_functions import offer_E, multiproduct_offer
+from .offer_functions import offer_E, multiproduct_offer, remove_other_product_offer
 
 def calculate_prices(skus: List[str], prices: Dict[str, int], total: int) -> int:
     counts = Counter(skus)
@@ -16,8 +16,8 @@ def calculate_prices(skus: List[str], prices: Dict[str, int], total: int) -> int
 # skus = unicode string
 def checkout(skus: str) -> int:
     # apply offers first - then calculate prices
-    offers = [
-        offer_E,
+    remove_other_product_offers = [
+        ("E", (2, "B"))
     ]
     multiproduct_offers = [
         ("A", {5: 200, 3: 130}),
@@ -26,8 +26,13 @@ def checkout(skus: str) -> int:
     ]
     skus = list(skus)
     total = 0
-    for offer in offers:
-        skus, total = offer(skus, total)
+    for prod, offer in remove_other_product_offers:
+        skus, total = remove_other_product_offer(
+            skus=skus,
+            total=total,
+            product=prod,
+            offer=offer
+        )
 
     for product, price_map in multiproduct_offers:
         skus, total = multiproduct_offer(skus=skus, total=total, product=product,
@@ -45,4 +50,5 @@ def checkout(skus: str) -> int:
 
     total = calculate_prices(skus=skus, prices=prices, total=total)
     return total
+
 

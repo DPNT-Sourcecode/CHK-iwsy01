@@ -14,6 +14,24 @@ def offer_E(skus: List[str], total: int) -> Tuple[List[str], int]:
     return skus, total
 
 
+def remove_other_product_offer(
+        skus: List[str],
+        total: int,
+        product: str,
+        offer: Tuple[int, str],
+) -> Tuple[List[str], int]:
+    count = skus.count(product)
+    multiple, other_product = offer
+    to_remove = count // multiple
+    # count ends up as the remainder after all offers applied
+    for i in range(to_remove):
+        try:
+            skus.remove(other_product)
+        except ValueError:
+            break
+    return skus, total
+
+
 def multiproduct_offer(
         skus: List[str],
         total: int,
@@ -33,3 +51,4 @@ def multiproduct_offer(
         except ValueError:
             break
     return skus, total
+

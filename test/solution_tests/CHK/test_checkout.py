@@ -7,3 +7,5 @@ class TestCheckout():
 
     def test_invalid_input(self):
         assert checkout_solution.checkout("AK") == -1
+
+    def test_new_offers

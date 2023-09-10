@@ -2,13 +2,22 @@ from collections import Counter
 from typing import Tuple
 
 
-def offer_E(skus: str) -> Tuple[str, int]:
+def offer_E(skus: str, total: int) -> Tuple[str, int]:
     # apply the offer (get one b free for 2 e) by removing b from the skus to charge
     count_e = skus.count("E")
     skus = list(skus)
     for i in range(count_e):
-        
-    pass
+        try:
+            skus.remove("B")
+        except ValueError:
+            break
+    return ''.join(skus), total
+
+
+def offer_A(skus: str, total: int) -> Tuple[str, int]:
+    count_a = skus.count("A")
+    skus = list(skus)
+
 
 
 # noinspection PyUnusedLocal
